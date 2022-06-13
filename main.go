@@ -1,15 +1,25 @@
 package main
 
-import note "goproject/gonote"
+import (
+	"fmt"
+	notes "goproject/gonote"
+)
+
+func init() {
+	fmt.Println("初始化函数执行顺序")
+	fmt.Println("被依赖包全局变量 -> 被依赖包init函数 -> main函数全局变量 -> main函数init -> main函数")
+}
 
 func main() {
-	note.SayHello()
-	note.VarConst()
-	println(note.Version)
-	note.BasicData()
-	note.Pointer()
-	note.FmtVerbs()
+	notes.SayHello()
+	notes.VarConst()
+	println(notes.Version)
+	notes.BasicData()
+	notes.Pointer()
+	notes.FmtVerbs()
 	// note.SwitchCase()
 	// note.LabelAndGoto()
-	note.DefferFunc()
+	notes.DefferFunc()
+	notes.Slice()
+	notes.Map()
 }

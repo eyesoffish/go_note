@@ -139,4 +139,71 @@ func DefferFunc() {
 	defer fmt.Println(sum(1, 0))
 	defer fmt.Println(sum(2, 0))
 	fmt.Println(sum(3, 0))
+
+	// deferRecover 错误处理
+	
+	defer func ()  {
+		err := recover()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
+	n := 0
+	fmt.Println(3 / n)
+}
+
+// 数组
+func Slice() {
+	array := [5]int{1,2,3,4,5}
+	var s1 []int = array[0: len(array) - 1]
+	s1[1] = 10
+	fmt.Printf("array = %v\n", array)
+	s2 := s1[1:]
+	s2[0] = 0;
+	fmt.Printf("array = %v\n", array)
+	var s3 []int
+	fmt.Println("s3 == true", s3 == nil)
+	// s3为最小长度3, 最大长度5,, 
+	s3 = make([]int, 3, 5)
+	s1 = append(s1, 5,6,7,8)// 底层创建了新的数组,不再引用原数组
+	fmt.Println(s1) 
+	s4 := make([]int, 1)
+	copy(s3, s4) // 容量能复制多少就接收多少
+	fmt.Println("s4 = ", s4) 
+	str := "hello 世界"
+	for i,v := range str {
+		fmt.Printf("str = %d, %c\n", i,v)
+	}
+}
+
+// map map和数组默认为nil
+func Map() {
+	var m1 map[string]string
+	fmt.Println(m1)
+	m1 = make(map[string]string, 2)// 容量会自动增长, size如果省略, 长度默认为1
+	m1["1"] = "m1"
+	m1["2"] = "m2"
+	m1["3"] = "m3"
+	fmt.Println("m1 = ", m1)
+	m2 := map[string]string{
+		"4":"m4",
+		"5":"m5",
+	}
+	fmt.Println("m2 = ", m2)
+
+	v, ok := m2["14"]
+	if ok {
+		fmt.Println("key = 4 exist ", v)
+	} else {
+		fmt.Println("key = 4 not exist ", v == "")
+	}
+	delete(m1, "1")
+	fmt.Println("m1 delete ", m1)
+	// m1 = nil
+	m2 = make(map[string]string)
+	fmt.Println("m1 nil ", m1, m2)
+
+	for key,value := range m1 {
+		fmt.Println("key, value", key, value)
+	}
 }
