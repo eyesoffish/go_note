@@ -22,4 +22,5 @@ func main() {
 	notes.DefferFunc()
 	notes.Slice()
 	notes.Map()
+	notes.TypeDefineAndTypeAlias()
 }

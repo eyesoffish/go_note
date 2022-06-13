@@ -207,3 +207,17 @@ func Map() {
 		fmt.Println("key, value", key, value)
 	}
 }
+
+// 自定义数据类型
+
+func TypeDefineAndTypeAlias() {
+	type mesType uint16
+	var u1000 uint16 = 1000;
+	var textMsg mesType = mesType(u1000)
+	fmt.Printf("textMsg = %v, Type of textMes = %T\n", textMsg, textMsg)
+
+	// 别名
+	type myUint = uint16
+	var  u2000 myUint = u1000
+	fmt.Printf("textMsg = %v, Type of textMsg = %T\n", u2000, u2000)
+}
