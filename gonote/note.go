@@ -129,3 +129,14 @@ func LabelAndGoto() {
 		fmt.Println()
 	}
 }
+
+// deffer
+
+func DefferFunc() {
+	var sum = func(a, b int) int {
+		return a + b
+	}
+	defer fmt.Println(sum(1, 0))
+	defer fmt.Println(sum(2, 0))
+	fmt.Println(sum(3, 0))
+}

@@ -10,5 +10,6 @@ func main() {
 	note.Pointer()
 	note.FmtVerbs()
 	// note.SwitchCase()
-	note.LabelAndGoto()
+	// note.LabelAndGoto()
+	note.DefferFunc()
 }
