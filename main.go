@@ -11,21 +11,26 @@ func init() {
 }
 
 func main() {
-	notes.SayHello()
-	notes.VarConst()
-	println(notes.Version)
-	notes.BasicData()
-	notes.Pointer()
-	notes.FmtVerbs()
-	// note.SwitchCase()
-	// note.LabelAndGoto()
-	notes.DefferFunc()
-	notes.Slice()
-	notes.Map()
-	notes.TypeDefineAndTypeAlias()
-	notes.Struct()
-	notes.Method()
-	notes.Interface()
-	// notes.Goroutine()
-	notes.Channel()
+	// 第一部分语法
+	// notes.SayHello()
+	// notes.VarConst()
+	// println(notes.Version)
+	// notes.BasicData()
+	// notes.Pointer()
+	// notes.FmtVerbs()
+	// // note.SwitchCase()
+	// // note.LabelAndGoto()
+	// notes.DefferFunc()
+	// notes.Slice()
+	// notes.Map()
+	// notes.TypeDefineAndTypeAlias()
+	// notes.Struct()
+	// notes.Method()
+	// notes.Interface()
+	// // notes.Goroutine()
+	// notes.Channel()
+
+	// 第二部分 
+	notes.RandNum()
+	notes.StrConv()
 }
