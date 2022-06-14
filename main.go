@@ -23,4 +23,7 @@ func main() {
 	notes.Slice()
 	notes.Map()
 	notes.TypeDefineAndTypeAlias()
+	notes.Struct()
+	notes.Method()
+	notes.Interface()
 }

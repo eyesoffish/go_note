@@ -221,3 +221,88 @@ func TypeDefineAndTypeAlias() {
 	var  u2000 myUint = u1000
 	fmt.Printf("textMsg = %v, Type of textMsg = %T\n", u2000, u2000)
 }
+
+// 结构体
+type User struct {
+	Name string `json:"name"`
+	Id uint32	`json:"id"`
+}
+// 继承
+type Account struct {
+	User
+	password string
+}
+
+func Struct() {
+	var u1 User = User{Name: "张三", Id: 10000}
+	fmt.Printf("user = %v", u1)
+	var u2 Account = Account{User: User{Name: "李四", Id: 2000}, password:"666"}
+	fmt.Printf("user2 = %v", u2)
+}
+
+// 方法
+func (u User) printName() {
+	fmt.Println(u.Name)
+}
+
+func (u *User) setId() {
+	(*u).Id = 2000;
+}
+
+func Method() {
+	u1 := User{Name: "张三", Id: 10000}
+	u1.printName()
+	u1.setId()
+	fmt.Println("res == ",u1.Name, u1.Id)
+}
+
+
+// 接口
+type textMsg struct {
+	Text string
+	Type string
+}
+func (tm *textMsg) setText() {
+	tm.Text = "newText"
+}
+type imageMsg struct {
+	Image string
+	Type string
+}
+func (img *imageMsg) setImage() {
+	img.Image = "清明上河图"
+}
+
+type Msg interface {
+	setType()
+}
+
+func (tm *textMsg) setType(){tm.Type = "文字消息"}
+func (tm *imageMsg) setType(){tm.Type = "图片消息"}
+
+func SendMsg(m Msg) {
+	m.setType()
+	switch mptr:=m.(type) {
+	case *textMsg:
+		mptr.setText()
+	case *imageMsg:
+		mptr.setImage()
+	}
+	fmt.Println("m=",m)
+}
+
+func Interface() {
+	tm:=textMsg{}
+	im:=imageMsg{}
+	SendMsg(&tm)
+	SendMsg(&im)
+
+	var n1 int = 1
+	n1interface := interface{}(n1)
+	n2,ok := n1interface.(string)
+	if ok {
+		fmt.Println("n2 = ", n2)
+	} else {
+		fmt.Println("n2 = ", n2)
+	}
+}
