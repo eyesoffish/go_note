@@ -26,4 +26,6 @@ func main() {
 	notes.Struct()
 	notes.Method()
 	notes.Interface()
+	// notes.Goroutine()
+	notes.Channel()
 }

@@ -1,6 +1,9 @@
 package note
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 const(
 	Version = 1000
@@ -304,5 +307,82 @@ func Interface() {
 		fmt.Println("n2 = ", n2)
 	} else {
 		fmt.Println("n2 = ", n2)
+	}
+}
+
+var (
+	c int = 0
+	lock sync.Mutex
+)
+// 线程
+func PrimeNum(n int) {
+	for i := 2; i < n; i++ {
+		if n % i == 0 {
+			return
+		}
+	}
+	fmt.Printf("%v\t", n)
+	lock.Lock()
+	c++
+	lock.Unlock()
+}
+
+func Goroutine() {
+	for i := 2; i < 100001; i++ {
+		go PrimeNum(i)
+	}
+	// 阻塞
+	var key string
+	fmt.Scanln(&key)
+	fmt.Printf(",\n共找到%v", c)
+}
+
+
+// channel
+// 线程
+func pushPrimeNum(n int, c chan int) {
+	for i := 2; i < n; i++ {
+		if n % i == 0 {
+			return
+		}
+	}
+	c <- n
+}
+func pushNum(c chan int) {
+	for i := 0; i < 100; i++ {
+		c <- i
+	}
+	// close(c)
+}
+func Channel() {
+	var c1 chan int = make(chan int, 10) // 数据类型和缓冲大小
+	// c1 <- 1 // 1流动到c1
+	go pushNum(c1)
+	// for {
+	// 	v, ok := <- c1
+	// 	if ok {
+	// 		fmt.Printf("%v\t", v)
+	// 	} else {
+	// 		break
+	// 	}
+	// }
+	for v := range c1 {
+		fmt.Printf("%v\t", v)
+	}
+
+	// 不确定什么时候关闭
+	var c2 chan int = make(chan int, 100)
+	for i := 0; i < 100001; i++ {
+		go pushPrimeNum(i, c2)
+	}
+	Print:
+	for {
+		select {
+		case v:= <- c2:
+			fmt.Printf("%v\t", v)
+		default:
+			fmt.Printf("所有数完成")
+			break Print
+		}
 	}
 }
