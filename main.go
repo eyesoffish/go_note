@@ -33,4 +33,7 @@ func main() {
 	// 第二部分 
 	notes.RandNum()
 	notes.StrConv()
+	notes.PackageString()
+	notes.PackageUFT8()
+	notes.Time()
 }
