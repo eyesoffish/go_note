@@ -30,3 +30,5 @@ func MkdirWithFilePath(filepath string) error {
 
 	return os.MkdirAll(paths[len(paths) - 1], 0775)
 }
+
+

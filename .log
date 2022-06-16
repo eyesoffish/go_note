@@ -1,0 +1,10 @@
+INFO: 2022/06/16 17:56:15 /Users/zoulin/Desktop/go_note/gonote/std.go:179: 可爱的错误
+WARN: 2022/06/16 17:56:15 /Users/zoulin/Desktop/go_note/gonote/std.go:180: 可爱的错误
+INFO: 2022/06/16 17:57:13 /Users/zoulin/Desktop/go_note/gonote/std.go:179: 可爱的错误
+WARN: 2022/06/16 17:57:13 /Users/zoulin/Desktop/go_note/gonote/std.go:180: 可爱的错误
+INFO: 2022/06/16 17:57:46 /Users/zoulin/Desktop/go_note/gonote/std.go:181: 可爱的错误
+WARN: 2022/06/16 17:57:46 /Users/zoulin/Desktop/go_note/gonote/std.go:182: 可爱的错误2
+INFO: 2022/06/16 17:58:16 /Users/zoulin/Desktop/go_note/gonote/std.go:181: 可爱的错误1
+WARN: 2022/06/16 17:58:16 /Users/zoulin/Desktop/go_note/gonote/std.go:182: 可爱的错误2
+INFO: 2022/06/16 17:58:56 /Users/zoulin/Desktop/go_note/gonote/std.go:181: 可爱的错误1
+ERROR: 2022/06/16 17:58:56 /Users/zoulin/Desktop/go_note/gonote/std.go:183: 可爱的错误3

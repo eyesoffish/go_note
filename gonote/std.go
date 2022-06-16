@@ -1,8 +1,12 @@
 package note
 
 import (
+	"bufio"
+	"errors"
 	"fmt"
+	"goproject/gonote/util"
 	"math/rand"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -127,4 +131,55 @@ func Time() {
 	case <- time.NewTicker(time.Second).C:
 		fmt.Println("验证码已过期")
 	}
+}
+
+
+// 文件读写
+func FileReadAndWrite() {
+	file, err := os.OpenFile("gonote/f1.txt", os.O_WRONLY | os.O_CREATE, 0666);
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	write := bufio.NewWriter(file)
+	for i := 1; i <= 4; i++ {
+		fileName := fmt.Sprintf("gonote/f%d.txt",i)
+		data, err := os.ReadFile(fileName)
+		if err != nil {
+			panic(err)
+		}
+		data = append(data, '\n')
+		write.Write(data) // 写入缓冲区
+	}
+	write.Flush() // 写入硬盘
+}
+
+// 错误 err 默认值nil
+func Errors() {
+	// 
+	defer func() {
+		err := recover()
+		if err != nil {fmt.Println("捕捉到了错误", err)}
+	}()
+	err1 := errors.New("可爱的错误")
+	fmt.Println(err1)
+	err2 := fmt.Errorf("温柔的错误 , %v", 2)
+	fmt.Println(err2)
+}
+
+// 日志
+func Log() {
+	defer func ()  {
+		err := recover()
+		if err != nil {
+			fmt.Println("捕捉到了错误->Log")
+		}
+	}()
+	err1 := errors.New("可爱的错误1")
+	// err2 := errors.New("可爱的错误2")
+	err3 := errors.New("可爱的错误3")
+	util.INFO.Println(err1)
+	// panic 和fatal 都会导致程序退出,所以两个一起用会有一个错误无法记录
+	// util.WARN.Panicln(err2)
+	util.ERROR.Fatalln(err3)
 }

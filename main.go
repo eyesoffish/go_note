@@ -31,10 +31,13 @@ func main() {
 	// notes.Channel()
 
 	// 第二部分 
-	notes.RandNum()
-	notes.StrConv()
-	notes.PackageString()
-	notes.PackageUFT8()
-	notes.Time()
-	notes.FileOperation()
+	// notes.RandNum()
+	// notes.StrConv()
+	// notes.PackageString()
+	// notes.PackageUFT8()
+	// notes.Time()
+	// notes.FileOperation()
+	// notes.FileReadAndWrite()
+	// notes.Errors()
+	notes.Log()
 }
