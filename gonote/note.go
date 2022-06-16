@@ -2,6 +2,7 @@ package note
 
 import (
 	"fmt"
+	"os"
 	"sync"
 )
 
@@ -384,5 +385,34 @@ func Channel() {
 			fmt.Printf("所有数完成")
 			break Print
 		}
+	}
+}
+
+// 文件操作
+func FileOperation() {
+	// util.MkdirWithFilePath("d1/d2/d3/dc/a.txt")
+	dirEntrys, err := os.ReadDir("/Users/zoulin/Desktop/go_note")
+	if err != nil {
+		panic(err)
+	}
+	for _, v := range dirEntrys {
+		fmt.Println(v.Name())
+	}
+
+	file, err := os.OpenFile("gonote/f1.txt", os.O_RDWR | os.O_CREATE, 0665)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	// 无缓冲区的读写
+	data, err := os.ReadFile("gonote/f1.txt")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("f1文件中的数据=>",data)
+	err = os.WriteFile("gonote/f2.txt", data, 0775)
+	if err != nil {
+		panic(err)
 	}
 }

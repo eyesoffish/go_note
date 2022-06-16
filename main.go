@@ -36,4 +36,5 @@ func main() {
 	notes.PackageString()
 	notes.PackageUFT8()
 	notes.Time()
+	notes.FileOperation()
 }
