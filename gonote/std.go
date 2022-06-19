@@ -183,3 +183,7 @@ func Log() {
 	// util.WARN.Panicln(err2)
 	util.ERROR.Fatalln(err3)
 }
+
+func isNotNegative( n int) bool {
+	return n > -1
+}
