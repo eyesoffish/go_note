@@ -40,4 +40,5 @@ func main() {
 	// notes.FileReadAndWrite()
 	// notes.Errors()
 	notes.Log()
+	
 }

@@ -184,6 +184,6 @@ func Log() {
 	util.ERROR.Fatalln(err3)
 }
 
-func isNotNegative( n int) bool {
+func IsNotNegative( n int) bool {
 	return n > -1
 }

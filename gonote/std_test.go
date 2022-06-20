@@ -6,7 +6,13 @@ import (
 )
 func TestIsNotNegative(log *testing.T) {
 	err := errors.New("is Negative")
-	if isNotNegative(-1) {
+	if IsNotNegative(-1) {
+		log.Log("OK")
+	} else {
+		log.Error(err)
+	}
+
+	if IsNotNegative(1) {
 		log.Log("OK")
 	} else {
 		log.Error(err)
