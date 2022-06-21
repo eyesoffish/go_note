@@ -8,8 +8,10 @@ import (
 	"goproject/gonote/util"
 	"math/rand"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 	"unicode/utf8"
 )
@@ -208,4 +210,101 @@ func CmdArgs() {
 		fmt.Print("Gonote版本是 v0.0.0")
 	}
 	fmt.Println("当前用户为", userName)
+}
+
+
+// builtin package
+func PackageBuiltin() {
+	c1 := complex(12.34, 45.67)
+	fmt.Println("c1 = ", c1)
+	r1 := real(c1)
+	i1 := imag(c1)
+	fmt.Println("r1 = ", r1, "i1=", i1)
+}
+
+// runtime()
+func PackageRuntime() {
+	// 返回计算机逻辑处理数量
+	if runtime.NumCPU() > 7 {
+		// 允许go最多调几个处理器
+		runtime.GOMAXPROCS(runtime.NumCPU() - 1 )
+	}
+}
+
+// sync
+func PackageSync() {
+	var c int = 0
+	var lock sync.Mutex
+	var wg sync.WaitGroup
+	// 线程
+	primeNum := func(n int) {
+		defer wg.Done()
+		for i := 2; i < n; i++ {
+			if n % i == 0 {
+				return
+			}
+		}
+		fmt.Printf("%v\t", n)
+		lock.Lock()
+		c++
+		lock.Unlock()
+	}
+	
+	for i := 2; i < 100001; i++ {
+		wg.Add(1)
+		go primeNum(i)
+	}
+	// 阻塞
+	wg.Wait()
+	fmt.Printf(",\n共找到%v", c)
+}
+
+// sync cond
+func PackageSyncCond() {
+	var lock sync.Mutex
+	var wg sync.WaitGroup
+	cond := sync.NewCond(&lock) // 提供了同时控制多个携程阻塞的能力
+	for i := 0; i < 10; i++ {
+		go func(n int) {
+			cond.L.Lock()
+			cond.Wait()
+			fmt.Printf("携程%v,被唤醒了\n", n)
+			cond.L.Unlock()
+		}(i)
+	}
+
+	for i := 0; i < 15; i++ {
+		time.Sleep(100 * time.Millisecond)
+		fmt.Print(".")
+		if i == 4 {
+			fmt.Println()
+			cond.Signal()
+		}
+		if i == 9 {
+			fmt.Println()
+			cond.Broadcast()
+		}
+	}
+
+	// once
+	var once sync.Once
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			once.Do(func() {
+				fmt.Println("只有一次机会")
+			})
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	// map
+	var m sync.Map
+	m.Store(1, 100)
+	m.Store(2, 200)
+	m.Range(func(key, value interface{}) bool {
+		fmt.Printf("m[%v] = %v\n", key, value.(int))
+		return true	
+	})
 }

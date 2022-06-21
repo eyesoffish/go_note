@@ -40,5 +40,8 @@ func main() {
 	// notes.FileReadAndWrite()
 	// notes.Errors()
 	// notes.Log()
-	notes.CmdArgs()
+	// notes.CmdArgs()
+	// notes.PackageBuiltin()
+	// notes.PackageSync()
+	notes.PackageSyncCond()
 }
