@@ -39,6 +39,6 @@ func main() {
 	// notes.FileOperation()
 	// notes.FileReadAndWrite()
 	// notes.Errors()
-	notes.Log()
-	
+	// notes.Log()
+	notes.CmdArgs()
 }

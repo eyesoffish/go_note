@@ -3,6 +3,7 @@ package note
 import (
 	"bufio"
 	"errors"
+	"flag"
 	"fmt"
 	"goproject/gonote/util"
 	"math/rand"
@@ -186,4 +187,25 @@ func Log() {
 
 func IsNotNegative( n int) bool {
 	return n > -1
+}
+
+// 命令行参数
+func CmdArgs() {
+	fmt.Printf("接收到了%v个参数", len(os.Args));
+	for i, v := range os.Args {
+		fmt.Printf("第%v各参数是%v\n", i, v);
+	}
+	fmt.Println()
+	vPtr := flag.Bool("v", false, "Gonote版本")
+	var userName string
+	flag.StringVar(&userName, "u", "", "用户名")
+	flag.Func("f", "", func(s string) error {
+		fmt.Println("s=", s)
+		return nil
+	})
+	flag.Parse()
+	if *vPtr {
+		fmt.Print("Gonote版本是 v0.0.0")
+	}
+	fmt.Println("当前用户为", userName)
 }
