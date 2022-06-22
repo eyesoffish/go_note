@@ -43,5 +43,6 @@ func main() {
 	// notes.CmdArgs()
 	// notes.PackageBuiltin()
 	// notes.PackageSync()
-	notes.PackageSyncCond()
+	// notes.PackageSyncCond()
+	notes.Recursion()
 }
