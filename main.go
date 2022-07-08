@@ -46,5 +46,7 @@ func main() {
 	// notes.PackageSyncCond()
 	// notes.Recursion()
 	// notes.Closure()
-	notes.Sort()
+	// notes.Sort()
+	// notes.PackageSort()
+	notes.BinarySearchText()
 }

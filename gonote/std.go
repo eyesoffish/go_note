@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"os"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -307,4 +308,43 @@ func PackageSyncCond() {
 		fmt.Printf("m[%v] = %v\n", key, value.(int))
 		return true	
 	})
+}
+
+type Person struct {
+	Name string
+	Age int
+}
+
+type PersonSlice[] Person
+func (ps PersonSlice) Len() int {
+	return len(ps)
+}
+func (ps PersonSlice) Less(i, j int) bool {
+	return ps[i].Age < ps[j].Age
+}
+func (ps PersonSlice) Swap(i,j int) {
+	ps[i],ps[j] = ps[j],ps[i]
+}
+func PackageSort() {
+	// 下标插入搜索
+	is:=[]int{2,3,4,5,8, 10}
+	v:=6
+	i:=sort.SearchInts(is, v)
+	fmt.Println("ss=",i)
+
+	/// 自定义排序
+	p := []Person{{"小小1", 18},{"小小0", 14},{"小小2", 16},}
+	// sort.Slice(p, func(i, j int) bool {
+	// 	return p[i].Age < p[j].Age
+	// })
+	fmt.Println("persons = ", p)
+	// 自定义查找, 第一次出现不小于6的w
+	sort.Search(len(is), func(i int) bool {
+		return is[i] >= v
+	})
+	fmt.Printf("%v中第一次出现不小于%v的位置是%v\n", is, v, i)
+	
+	fmt.Println("sort interface")
+	sort.Sort(sort.Reverse(PersonSlice(p)))
+	fmt.Println("persons1 = ", p)
 }
