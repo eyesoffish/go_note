@@ -8,7 +8,9 @@ import (
 	"flag"
 	"fmt"
 	"goproject/gonote/util"
+	"io"
 	"math/rand"
+	"net"
 	"os"
 	"runtime"
 	"sort"
@@ -379,5 +381,87 @@ func PackageJson() {
 	fmt.Println("u2 = ", u2)
 	res := json.Valid(data)
 	fmt.Println("是否是有效的json = ", res)
+}
 
+// TCP
+func TcpCli() {
+	conn, err := net.Dial("tcp","127.0.0.1:8080")
+	if err != nil {
+		fmt.Println("拨号失败")
+	}
+	defer conn.Close()
+	for {
+		mes := struct{
+			UserName string
+			Mes 	 string
+		}{UserName: "方块"}
+		fmt.Println("请输入发送内容")
+		fmt.Scanf("%s\n", &mes.Mes)
+		if mes.Mes == "" {
+			fmt.Println("输入内容为空")
+		}
+		if mes.Mes == "exit" {
+			return
+		}
+		// data, _ := json.Marshal(mes)
+		// n, err := conn.Write(data)
+		// if err != nil {
+		// 	fmt.Println("发送失败")
+		// }
+		// fmt.Printf("成功发送了%v个字节\n", n)
+		err = json.NewEncoder(conn).Encode(&mes)
+		if err != nil {
+			fmt.Println("发送失败")
+		}
+ 	}
+}
+
+func TcpServer() {
+	listener, err := net.Listen("tcp",":8080")
+	if err != nil {
+		fmt.Println("监听失败")
+		return
+	}
+	defer listener.Close()
+	for {
+		fmt.Println("主进程等待客户端链接....")
+		conn, err := listener.Accept()
+		if err != nil {
+			fmt.Println("接听失败 = ", err)
+			continue
+		}
+		go func(conn net.Conn){
+			fmt.Println("一个客户端携程已开启")
+			defer conn.Close()
+			for {
+				mes := struct {
+					UserName string
+					Mes string
+				}{}
+				// buf := make([] byte, 4096)
+				// n, err := conn.Read(buf)
+				// if err == io.EOF {
+				// 	fmt.Println("客户端退出")
+				// 	return
+				// }
+				// if err != nil {
+				// 	fmt.Println("读取消息失败", n)
+				// 	return
+				// }
+
+				// json.Unmarshal(buf[:n], &mes)
+				// fmt.Println("读取消息成功")
+				err := json.NewDecoder(conn).Decode(&mes)
+				if err == io.EOF {
+					fmt.Println("客户端退出")
+					return
+				}
+				if err != nil {
+					fmt.Println("读取失败", err)
+					return
+				}
+				fmt.Printf("%s说:%s\n",mes.UserName, mes.Mes)
+			}
+		} (conn)
+	}
 }

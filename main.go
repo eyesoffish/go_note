@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	note "goproject/gonote"
-	"goproject/gonote/factory"
 )
 
 func init() {
@@ -50,7 +49,10 @@ func main() {
 	// notes.Sort()
 	// notes.PackageSort()
 	// notes.BinarySearchText()
-	m := factory.NewMes()
-	m.SetPwd("asdf")
-	note.PackageJson()
+	// m := factory.NewMes()
+	// m.SetPwd("asdf")
+	// note.PackageJson()
+
+	// note.TcpServer()
+	note.TcpCli()
 }
