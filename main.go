@@ -54,5 +54,7 @@ func main() {
 	// note.PackageJson()
 
 	// note.TcpServer()
-	note.TcpCli()
+	// note.TcpCli()
+
+	note.LevelDBBasic()
 }
