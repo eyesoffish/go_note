@@ -2,6 +2,8 @@ package note
 
 import (
 	"bufio"
+	"bytes"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -347,4 +349,35 @@ func PackageSort() {
 	fmt.Println("sort interface")
 	sort.Sort(sort.Reverse(PersonSlice(p)))
 	fmt.Println("persons1 = ", p)
+}
+
+func PackageJson() {
+	type user struct {
+		Name string `json:"keyName"`
+		Age int		`json:"age,omitempty"` // 编码时零值则跳过该字段
+		Email string `json:"-"` // 直接跳过
+		Job map[string]string
+	}
+
+	u1 := user{
+		Name: "方块",
+		Age: 3,
+		Job: map[string]string{
+			"早班":"保安",
+			"午班":"洗碗",
+			"晚班":"送外卖",
+		},
+	}
+	data,_ := json.Marshal(u1)
+	fmt.Println("json user = ", string(data));
+	buf := new(bytes.Buffer)
+	json.Indent(buf, data, "","\t")
+	print(buf.String())
+
+	var u2 user
+	json.Unmarshal(data, &u2)
+	fmt.Println("u2 = ", u2)
+	res := json.Valid(data)
+	fmt.Println("是否是有效的json = ", res)
+
 }

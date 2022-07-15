@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	notes "goproject/gonote"
+	note "goproject/gonote"
+	"goproject/gonote/factory"
 )
 
 func init() {
@@ -48,5 +49,8 @@ func main() {
 	// notes.Closure()
 	// notes.Sort()
 	// notes.PackageSort()
-	notes.BinarySearchText()
+	// notes.BinarySearchText()
+	m := factory.NewMes()
+	m.SetPwd("asdf")
+	note.PackageJson()
 }
