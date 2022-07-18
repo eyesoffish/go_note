@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	note "goproject/gonote"
+	notes "goproject/gonote"
 )
 
 func init() {
@@ -56,5 +56,8 @@ func main() {
 	// note.TcpServer()
 	// note.TcpCli()
 
-	note.LevelDBBasic()
+	// note.LevelDBBasic()
+	// notes.LevelDBIterate()
+	// notes.LeveldbTransactionAndSnapshot()
+	notes.RedisBasic()
 }
